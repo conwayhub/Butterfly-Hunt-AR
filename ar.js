@@ -20,41 +20,55 @@ targetEl.addEventListener("click", (event) => {
 });
 
 targetEl.addEventListener("mouseenter", () => {
-  scanTextEl.object3D.visible = false;
-  catchTextEl.object3D.visible = true;
+  if (!textEl.object3D.visible) {
+    scanTextEl.object3D.visible = false;
+    catchTextEl.object3D.visible = true;
+  }
 });
 
 targetEl.addEventListener("mouseleave", () => {
-  setTimeout(setVisibility, 2000);
-  catchTextEl.object3D.visible = false;
+  if (!textEl.object3D.visible) {
+    scanTextEl.object3D.visible = true;
+    catchTextEl.object3D.visible = false;
+  }
 });
 
 secondTargetEl.addEventListener("click", (event) => {
-  handleClick(secondTargetEl, catched2);
-  catched2 = true;
+  if (!textEl.object3D.visible) {
+    handleClick(secondTargetEl, catched2);
+    catched2 = true;
+  }
 });
 
 secondTargetEl.addEventListener("mouseenter", () => {
-  scanTextEl.object3D.visible = false;
-  catchTextEl.object3D.visible = true;
+  if (!textEl.object3D.visible) {
+    scanTextEl.object3D.visible = false;
+    catchTextEl.object3D.visible = true;
+  }
 });
 
 secondTargetEl.addEventListener("mouseleave", () => {
-  setTimeout(setVisibility, 2000);
-  catchTextEl.object3D.visible = false;
+  if (!textEl.object3D.visible) {
+    scanTextEl.object3D.visible = true;
+    catchTextEl.object3D.visible = false;
+  }
 });
-
 thirdTargetEl.addEventListener("click", (event) => {
   handleClick(thirdTargetEl, catched3);
   catched3 = true;
 });
 thirdTargetEl.addEventListener("mouseenter", () => {
-  scanTextEl.object3D.visible = false;
-  catchTextEl.object3D.visible = true;
+  if (!textEl.object3D.visible) {
+    scanTextEl.object3D.visible = false;
+    catchTextEl.object3D.visible = true;
+  }
 });
+
 thirdTargetEl.addEventListener("mouseleave", () => {
-  setTimeout(setVisibility, 2000);
-  catchTextEl.object3D.visible = false;
+  if (!textEl.object3D.visible) {
+    scanTextEl.object3D.visible = true;
+    catchTextEl.object3D.visible = false;
+  }
 });
 fourthTargetEl.addEventListener("click", (event) => {
   handleClick(fourthTargetEl, catched4);
@@ -62,13 +76,17 @@ fourthTargetEl.addEventListener("click", (event) => {
 });
 
 fourthTargetEl.addEventListener("mouseenter", () => {
-  scanTextEl.object3D.visible = false;
-  catchTextEl.object3D.visible = true;
+  if (!textEl.object3D.visible) {
+    scanTextEl.object3D.visible = false;
+    catchTextEl.object3D.visible = true;
+  }
 });
 
 fourthTargetEl.addEventListener("mouseleave", () => {
-  setTimeout(setVisibility, 2000);
-  catchTextEl.object3D.visible = false;
+  if (!textEl.object3D.visible) {
+    scanTextEl.object3D.visible = true;
+    catchTextEl.object3D.visible = false;
+  }
 });
 
 function handleClick(element, catchValue) {
@@ -86,7 +104,6 @@ function handleClick(element, catchValue) {
     setTimeout((event) => {
       textEl.object3D.visible = false;
     }, 2000);
-    starsEl.setAttribute("particle-system", "enabled", "true");
   } else {
     textEl.setAttribute(
       "value",
