@@ -1,130 +1,129 @@
-const targetEl = document.querySelector("#butterfly");
-const secondTargetEl = document.querySelector("#butterfly2");
-const thirdTargetEl = document.querySelector("#butterfly3");
-const fourthTargetEl = document.querySelector("#butterfly4");
-const textEl = document.querySelector("#text");
-const scanTextEl = document.querySelector("#promptToScan");
-const catchTextEl = document.querySelector("#promptToCatch");
-const gotItTextEl = document.querySelector("#catchedIt");
-const refObj = {};
+const firstButterfly = document.querySelector("#butterfly1");
+const secondButterfly = document.querySelector("#butterfly2");
+const thirdButterfly = document.querySelector("#butterfly3");
+const fourthButterfly = document.querySelector("#butterfly4");
+const fifthButterfly = document.querySelector("#butterfly5");
+const scanText = document.querySelector("#promptToScan");
+const catchText = document.querySelector("#promptToCatch");
+const congratsText = document.querySelector("#congratsPrompt");
+
+const firebaseConfig = {
+  apiKey: "AIzaSyB4tz8vEzmfsVvXs2hcKogzIdWECdNeQbc",
+  authDomain: "backend-679e8.firebaseapp.com",
+  databaseURL: "https://backend-679e8.firebaseio.com",
+  projectId: "backend-679e8",
+  storageBucket: "backend-679e8.appspot.com",
+  messagingSenderId: "363772688197",
+  appId: "1:363772688197:web:1b1ae070f6afdaf41eb02c",
+  measurementId: "G-6FSQXQCNBN",
+};
+
+const { PID } = Qs.parse(location.search, {
+  ignoreQueryPrefix: true,
+});
+
+const { CID } = Qs.parse(location.search, {
+  ignoreQueryPrefix: true,
+});
+
+firebase.initializeApp(firebaseConfig);
+let firestore = firebase.firestore();
+const docRef = firestore.doc(`parents/${PID}/userProfiles/${CID}`);
+
+const increment = firebase.firestore.FieldValue.increment(1);
+
 let catched1 = false;
 let catched2 = false;
 let catched3 = false;
 let catched4 = false;
+let catched5 = false;
 
-targetEl.addEventListener("click", (event) => {
-  handleClick(targetEl, catched1);
+firstButterfly.addEventListener("click", (event) => {
+  handleClick(firstButterfly, catched1);
   catched1 = true;
 });
 
-targetEl.addEventListener("mouseenter", () => {
-  scanTextEl.object3D.visible = false;
-  catchTextEl.object3D.visible = true;
-});
-
-targetEl.addEventListener("mouseleave", () => {
-  setTimeout(setVisibility, 2000);
-  catchTextEl.object3D.visible = false;
-});
-
-secondTargetEl.addEventListener("click", (event) => {
-  handleClick(secondTargetEl, catched2);
+secondButterfly.addEventListener("click", (event) => {
+  handleClick(secondButterfly, catched2);
   catched2 = true;
 });
-secondTargetEl.addEventListener("mouseenter", () => {
-  scanTextEl.object3D.visible = false;
-  catchTextEl.object3D.visible = true;
-});
 
-secondTargetEl.addEventListener("mouseleave", () => {
-  setTimeout(setVisibility, 2000);
-  catchTextEl.object3D.visible = false;
-});
-
-thirdTargetEl.addEventListener("click", (event) => {
-  handleClick(thirdTargetEl, catched3);
+thirdButterfly.addEventListener("click", (event) => {
+  handleClick(thirdButterfly, catched3);
   catched3 = true;
 });
-thirdTargetEl.addEventListener("mouseenter", () => {
-  scanTextEl.object3D.visible = false;
-  catchTextEl.object3D.visible = true;
-});
-thirdTargetEl.addEventListener("mouseleave", () => {
-  setTimeout(setVisibility, 2000);
-  catchTextEl.object3D.visible = false;
-});
-fourthTargetEl.addEventListener("click", (event) => {
-  handleClick(fourthTargetEl, catched4);
+
+fourthButterfly.addEventListener("click", (event) => {
+  handleClick(fourthButterfly, catched4);
   catched4 = true;
 });
 
-fourthTargetEl.addEventListener("mouseenter", () => {
-  scanTextEl.object3D.visible = false;
-  catchTextEl.object3D.visible = true;
+fifthButterfly.addEventListener("click", (event) => {
+  handleClick(fifthButterfly, catched5);
+  catched5 = true;
 });
 
-fourthTargetEl.addEventListener("mouseleave", () => {
+const mouseEnter = () => {
+  scanText.object3D.visible = false;
+  catchText.object3D.visible = true;
+};
+
+const mouseLeave = () => {
+  catchText.object3D.visible = false;
   setTimeout(setVisibility, 2000);
-  catchTextEl.object3D.visible = false;
-});
+};
 
-function handleClick(element, catchValue) {
-  scanTextEl.object3D.visible = false;
-  catchTextEl.object3D.visible = false;
-  if (catchValue === false) {
-    addToRefObj(element);
-    textEl.setAttribute(
+firstButterfly.addEventListener("mouseenter", mouseEnter);
+firstButterfly.addEventListener("mouseleave", mouseLeave);
+
+secondButterfly.addEventListener("mouseenter", mouseEnter);
+secondButterfly.addEventListener("mouseleave", mouseLeave);
+
+thirdButterfly.addEventListener("mouseenter", mouseEnter);
+thirdButterfly.addEventListener("mouseleave", mouseLeave);
+
+fourthButterfly.addEventListener("mouseenter", mouseEnter);
+fourthButterfly.addEventListener("mouseleave", mouseLeave);
+
+fifthButterfly.addEventListener("mouseenter", mouseEnter);
+fifthButterfly.addEventListener("mouseleave", mouseLeave);
+
+const handleClick = (butterfly, catchValue) => {
+  catchText.object3D.visible = false;
+  fourSecondPrompt(congratsText, butterfly);
+  if (!catchValue) {
+    congratsText.setAttribute(
       "value",
-      `You caught a ${element.classList}!
+      `You caught a ${butterfly.classList.value}!
     You can now view it in your collection!`
     );
-    element.components.animation.attrValue.enabled = true;
-    setAsVisible(textEl);
-    setTimeout((event) => {
-      textEl.object3D.visible = false;
-    }, 2000);
+    butterfly.components.animation.attrValue.enabled = true;
+    docRef.update({ [butterfly.classList.value]: increment });
   } else {
-    textEl.setAttribute(
+    congratsText.setAttribute(
       "value",
-      `You've already caught this ${element.classList}!`
+      `You have already caught this ${butterfly.classList.value}!`
     );
-    element.components.animation.attrValue.enabled = true;
-    setAsVisible(textEl);
-    setTimeout((event) => {
-      textEl.object3D.visible = false;
-    }, 2000);
   }
-  console.log(refObj);
-}
+};
 
 const setVisibility = () => {
-  if (!catchTextEl.object3D.visible) {
-    scanTextEl.object3D.visible = true;
+  if (
+    catchText.object3D.visible === false &&
+    congratsText.object3D.visible === false
+  ) {
+    scanText.object3D.visible = true;
   }
 };
 
-const setAsInisible = (element) => {
-  element.object3D.visible = false;
-};
-const setAsVisible = (element) => {
+const fourSecondPrompt = (element, butterfly) => {
   element.object3D.visible = true;
+  setTimeout((event) => {
+    element.object3D.visible = false;
+    if (butterfly.states[0] === "cursor-hovered") {
+      catchText.object3D.visible = true;
+    } else {
+      scanText.object3D.visible = true;
+    }
+  }, 4000);
 };
-
-const addToRefObj = (target) => {
-  if (refObj[target.classList.value]) {
-    refObj[target.classList.value] = refObj[target.classList.value] + 1 || 0;
-  } else {
-    refObj[target.classList.value] = 1;
-  }
-  return refObj;
-};
-
-//how to create new element on page!
-
-// const newEntity = document.createElement("a-entity");
-// newEntity.setAttribute("geometry", {
-//   primitive: "box",
-//   height: 3,
-//   width: 1
-// });
-// targetEl.appendChild(newEntity)
