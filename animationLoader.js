@@ -16,13 +16,16 @@ const randomiser = () => {
   return Math.floor(Math.random() * 3);
 };
 
+const randomButterflyOne = butterflyArrays.marker1[randomiser()];
+
 setTimeout(() => {
   butterfly1.setAttribute(
     "gltf-model",
-    `https://raw.githubusercontent.com/Norbs89/ardemo/master/butterflies/${
-      butterflyArrays.marker1[randomiser()]
-    }.gltf`
+    `https://raw.githubusercontent.com/Norbs89/ardemo/master/butterflies/${randomButterflyOne}.gltf`
   );
+
+  console.log("animationLoader i ", randomButterflyOne);
+
   butterfly2.setAttribute(
     "gltf-model",
     `https://raw.githubusercontent.com/Norbs89/ardemo/master/butterflies/${
@@ -69,4 +72,12 @@ setTimeout(() => {
   butterfly5.classList.value = butterfly5
     .getAttribute("gltf-model")
     .slice(68, -5);
+
+  console.log("animationLoader ii", randomButterflyOne);
 }, 1500);
+
+setTimeout(() => {
+  console.log(">>>>>>>>>>>>>>>>>>>>>>>>>. this is the message");
+}, 1500);
+
+export { randomButterflyOne };

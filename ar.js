@@ -1,3 +1,5 @@
+import { randomButterflyOne } from "./animationLoader.js";
+
 const firstButterfly = document.querySelector("#butterfly1");
 const secondButterfly = document.querySelector("#butterfly2");
 const thirdButterfly = document.querySelector("#butterfly3");
@@ -6,6 +8,8 @@ const fifthButterfly = document.querySelector("#butterfly5");
 const congratsText = document.querySelector("#congratsPrompt");
 const scanText = document.querySelector("#promptToScan");
 const catchText = document.querySelector("#promptToCatch");
+
+console.log("ar.js", randomButterflyOne);
 
 const firebaseConfig = {
   apiKey: "AIzaSyB4tz8vEzmfsVvXs2hcKogzIdWECdNeQbc",
@@ -28,39 +32,42 @@ const { CID } = Qs.parse(location.search, {
 
 firebase.initializeApp(firebaseConfig);
 let firestore = firebase.firestore();
-const docRef = firestore.doc(`parents/${PID}/userProfiles/${CID}`);
+const docRef = firestore.doc(`parents/${UID}/userProfiles/${CID}`);
 
 const increment = firebase.firestore.FieldValue.increment(1);
 
-let catched1 = false;
-let catched2 = false;
-let catched3 = false;
-let catched4 = false;
-let catched5 = false;
+let caught1 = false;
+let caught2 = false;
+let caught3 = false;
+let caught4 = false;
+let caught5 = false;
 
 firstButterfly.addEventListener("click", (event) => {
-  handleClick(firstButterfly, catched1);
-  catched1 = true;
+  handleClick(firstButterfly, caught1);
+  caught1 = true;
+  if (caught1 && caught2 && caught3 && caught4 && caught5) {
+    location.href = `http://www.thevuewebsite.com/end-game-screen/?butterfly1=${randomButterflyOne}`;
+  }
 });
 
 secondButterfly.addEventListener("click", (event) => {
-  handleClick(secondButterfly, catched2);
-  catched2 = true;
+  handleClick(secondButterfly, caught2);
+  caught2 = true;
 });
 
 thirdButterfly.addEventListener("click", (event) => {
-  handleClick(thirdButterfly, catched3);
-  catched3 = true;
+  handleClick(thirdButterfly, caught3);
+  caught3 = true;
 });
 
 fourthButterfly.addEventListener("click", (event) => {
-  handleClick(fourthButterfly, catched4);
-  catched4 = true;
+  handleClick(fourthButterfly, caught4);
+  caught4 = true;
 });
 
 fifthButterfly.addEventListener("click", (event) => {
-  handleClick(fifthButterfly, catched5);
-  catched5 = true;
+  handleClick(fifthButterfly, caught5);
+  caught5 = true;
 });
 
 const mouseEnter = () => {
@@ -97,7 +104,6 @@ fifthButterfly.addEventListener("mouseenter", mouseEnter);
 fifthButterfly.addEventListener("mouseleave", mouseLeave);
 
 const handleClick = (butterfly, catchValue) => {
-  console.log(PID);
   scanText.object3D.visible = false;
   catchText.object3D.visible = false;
   if (!catchValue) {
