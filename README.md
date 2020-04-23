@@ -20,6 +20,8 @@ This repository is for the Augmented Reality elements of the application, and is
 
 View the live site here:  https://butterflyhunt.co.uk/
 
+Or to jump straigh to the AR without an account: https://butterflyhunt.netlify.app/ar.html
+
 ## The Vue Single Page Application
 
 If you're interested in this project please feel free to check out the github repo for the Vue Front End over [here](https://github.com/Harriet-Blundell/ScavengerHuntAR)
