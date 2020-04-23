@@ -64,8 +64,10 @@ fifthButterfly.addEventListener("click", (event) => {
 });
 
 const mouseEnter = () => {
-  scanText.object3D.visible = false;
-  catchText.object3D.visible = true;
+  if (congratsText.object3D.visible === false) {
+    scanText.object3D.visible = false;
+    catchText.object3D.visible = true;
+  }
 };
 
 const mouseLeave = () => {
