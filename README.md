@@ -12,7 +12,9 @@ Buterfly Hunt is a Marker based Augmented Reality game.  It is made up of a sing
 
 It was concieved of in response to the lockdown conditions imposed across the world in response to the COVID-19 pandemic.  My project team wanted to create an app that would give children access to an activity that they couldn't currently do outdoors, and give parents an engaging activity to ease some of the stresses of new fulltime childcare responsibilities.
 
-We imagined a Scavenger Hunt, where a parent could hide custom AR markers throughout their home, that a child could seek out and scan with their phone.  Each marker will reveal a randomly selected butterfly, which can be caught and added to the child's collection. 
+We imagined a scavenger hunt, where a parent could hide custom AR markers throughout their home, that a child could seek out and scan with their phone.  Each marker will reveal a randomly selected butterfly, which can be caught and added to the child's collection. 
+
+This was the final project produced on Northcoders Coding boot camp.  The project team members were [Harriet](https://github.com/Harriet-Blundell), [Rob](https://github.com/mauvesky1), [Norbert](https://github.com/mauvesky1), and  [Conway](https://github.com/conwayhub).
 
 This repository is for the Augmented Reality elements of the application, and is written in AR.js, A-Frame, and Javascript. 
 
